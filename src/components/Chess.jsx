@@ -82,6 +82,13 @@ const Chess = () => {
       <div className="mt-sm-3">
         <Board board={board} />
       </div>
+      <div className="possible-solutions text-center mt-sm-5">
+        {solutions && (
+          <span className="h4">
+            Possible solutions: {solutions["results"].length}
+          </span>
+        )}
+      </div>
       <div className="d-sm-flex mt-5 p-5 justify-content-around align-items-center text-center input-bar">
         {/* Reset board */}
         <button
@@ -144,13 +151,6 @@ const Chess = () => {
         >
           Visualize
         </button>
-      </div>
-      <div className="possible-solutions text-center mt-sm-2">
-        {solutions && (
-          <span className="h4">
-            Possible solutions: {solutions["results"].length}
-          </span>
-        )}
       </div>
     </div>
   );
