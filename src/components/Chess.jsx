@@ -10,13 +10,6 @@ const Chess = () => {
   const [animation_speed, setAnimationSpeed] = useState(50);
   const [solutions, setSolutions] = useState(null); // {results, animations}
 
-  // Toggle theme
-  const [theme, setTheme] = useState("dark");
-  function switchTheme() {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-  }
-
   function resetBoard() {
     const squares = new Array(boardSize);
     for (let i = 0; i < boardSize; i++) {
@@ -84,25 +77,12 @@ const Chess = () => {
   }
 
   return (
-    <div className="theme" data-theme={theme}>
-      <nav className="navbar navbar-dark">
-        <div className="container-fluid">
-          <span className="navbar-brand mb-0 h1">N-Queen</span>
-          {/* Toggle theme */}
-          <span
-            className="theme-icon text-warning h4 mb-0"
-            onClick={switchTheme}
-          >
-            {theme === "light" ? (
-              <i className="bi bi-moon-stars"></i>
-            ) : (
-              <i className="bi bi-brightness-high"></i>
-            )}
-          </span>
-        </div>
-      </nav>
-
-      <div className="d-sm-flex p-1 justify-content-around align-items-center text-center input-bar">
+    <div className="theme">
+      <div className="text-center display-6">N-Queens</div>
+      <div className="mt-sm-3">
+        <Board board={board} />
+      </div>
+      <div className="d-sm-flex mt-5 p-5 justify-content-around align-items-center text-center input-bar">
         {/* Reset board */}
         <button
           className="btn btn-dark mx-auto toggle-disabled"
@@ -114,14 +94,14 @@ const Chess = () => {
         {/* Animation Delay input */}
         <div className="form-control m-auto" style={{ maxWidth: 250 }}>
           <label htmlFor="customRange1" className="form-label">
-            <span className="text-primary">Animation Delay: </span>
+            <span className="text-secondary">Animation Delay: </span>
             <span className="font-weight-bold text-success">
               {`${animation_speed} ms`}
             </span>
           </label>
           <input
             type="range"
-            className="form-range toggle-disabled"
+            className="form-range toggle-disabled form-range-track-bg-warning"
             min="1"
             max="1000"
             step="1"
@@ -134,14 +114,14 @@ const Chess = () => {
         {/* Board size input */}
         <div className="form-control m-auto" style={{ maxWidth: 250 }}>
           <label htmlFor="customRange2" className="form-label">
-            <span className="text-primary">Size of Board: </span>
+            <span className="text-secondary">Size of Board: </span>
             <span className="font-weight-bold text-success">
               {`${boardSize} x ${boardSize}`}
             </span>
           </label>
           <input
             type="range"
-            className="form-range toggle-disabled"
+            className="form-range toggle-disabled form-range-track-bg-warning"
             min="4"
             max="12"
             step="1"
@@ -152,7 +132,7 @@ const Chess = () => {
         </div>
 
         <button
-          className="btn btn-success mx-2 mx-sm-auto toggle-disabled"
+          className="btn btn-secondary mx-2 mx-sm-auto toggle-disabled"
           onClick={solveNQueen}
         >
           Solve
@@ -165,13 +145,9 @@ const Chess = () => {
           Visualize
         </button>
       </div>
-
-      <div className="mt-sm-4">
-        <Board board={board} />
-      </div>
-      <div class="possible-solutions text-center mt-sm-2">
+      <div className="possible-solutions text-center mt-sm-2">
         {solutions && (
-          <span class="h4">
+          <span className="h4">
             Possible solutions: {solutions["results"].length}
           </span>
         )}
